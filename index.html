@@ -1,0 +1,1500 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>CartyGo — Final Year Project Defense</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Manrope:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="styles.css">
+
+<style>
+  body { margin: 0; background: #0a0a0d; }
+
+  /* ───────── COVER ───────── */
+  .cover { background: var(--bg); position: relative; overflow: hidden; }
+  .cover .top-bar {
+    position: absolute; top: 70px; left: 110px; right: 110px;
+    display: flex; align-items: center; justify-content: space-between;
+    font-family: var(--font-body); font-size: 30px;
+    letter-spacing: 0.22em; text-transform: uppercase; color: var(--ink); font-weight: 700;
+  }
+  .cover .top-bar .rule { flex: 1; height: 1px; background: var(--hairline); opacity: 0.6; margin: 0 28px; }
+  .cover .top-bar .dept { color: var(--ink-3); }
+
+  .cover .stage {
+    position: absolute; left: 110px; right: 110px; top: 160px;
+    display: flex; flex-direction: column; gap: 28px;
+  }
+  .cover .logo-row { display: flex; align-items: center; gap: 24px; }
+  .cover .logo-row img { width: 108px; height: 108px; display: block; }
+  .cover .logo-row .wordmark {
+    font-family: var(--font-display); font-size: 60px; letter-spacing: -0.025em;
+    color: var(--ink); line-height: 1;
+  }
+  .cover .logo-row .wordmark .go { color: var(--accent-2); }
+
+  .cover h1 {
+    font-family: var(--font-display);
+    font-size: 180px; line-height: 0.95; margin: 0;
+    letter-spacing: -0.045em; color: var(--ink);
+  }
+  .cover h1 .accent { color: var(--accent-2); }
+
+  .cover .tagline {
+    font-family: var(--font-body); font-weight: 500;
+    font-size: 36px; line-height: 1.35; color: var(--ink-2);
+    max-width: 1280px; margin: 0;
+  }
+
+  .cover .meta {
+    position: absolute; left: 110px; right: 110px; bottom: 80px;
+    display: grid; grid-template-columns: 1.4fr 1fr 0.9fr;
+    gap: 60px; padding-top: 28px;
+    border-top: 1px solid var(--hairline);
+  }
+  .cover .meta .lab {
+    font-size: 24px; letter-spacing: 0.22em; text-transform: uppercase;
+    color: var(--ink-3); font-weight: 700; margin-bottom: 12px;
+  }
+  .cover .meta .val {
+    font-family: var(--font-body); font-weight: 600;
+    font-size: 28px; color: var(--ink); line-height: 1.45;
+  }
+
+  /* Decorative lavender frame brackets, recalling the logo */
+  .cover .frame-bg {
+    position: absolute; inset: 0; pointer-events: none; opacity: 0.18;
+  }
+  .cover .frame-bg svg { width: 100%; height: 100%; }
+
+  /* ───────── HEAD/FOOT shared ───────── */
+  .s-head {
+    display: flex; align-items: center; justify-content: space-between;
+    font-family: var(--font-body); font-size: 24px; letter-spacing: 0.22em;
+    text-transform: uppercase; color: var(--ink-3); font-weight: 700;
+  }
+  .s-head .s-brand {
+    display: inline-flex; align-items: center; gap: 14px;
+    color: var(--ink); text-transform: none; letter-spacing: 0;
+  }
+  .s-head .s-brand img { width: 38px; height: 38px; display: block; }
+  .s-head .s-brand b { font-family: var(--font-display); font-size: 32px; letter-spacing: -0.01em; }
+  .s-head .s-brand b .go { color: var(--accent-2); }
+  .s-head .s-pill {
+    display: inline-flex; align-items: center; gap: 10px;
+    padding: 10px 22px; border: 1px solid var(--hairline); border-radius: 999px;
+    font-size: 22px; letter-spacing: 0.18em; color: var(--ink);
+  }
+  .s-head .s-pill .pill-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--lime-2); }
+  .s-rule { height: 1px; background: var(--hairline); opacity: 0.85; margin: 26px 0 0; }
+
+  /* ───────── Section headings ───────── */
+  .h-mega   { font-family: var(--font-display); font-size: 160px; line-height: 0.95; letter-spacing: -0.03em; color: var(--ink); margin: 0; }
+  .h-big    { font-family: var(--font-display); font-size: 96px;  line-height: 1.02; letter-spacing: -0.025em; color: var(--ink); margin: 0; }
+  .h-med    { font-family: var(--font-display); font-size: 72px;  line-height: 1.04;    letter-spacing: -0.02em; color: var(--ink); margin: 0; }
+  .h-sml    { font-family: var(--font-display); font-size: 56px;  line-height: 1.08; letter-spacing: -0.015em; color: var(--ink); margin: 0; }
+
+  /* Body sizes (reset from styles.css which uses 42px everywhere) */
+  deck-stage > section { font-size: 28px; }
+  .lead     { font-size: 36px; line-height: 1.5; color: var(--ink-2); max-width: 1300px; font-weight: 500; }
+  .lead-lg  { font-size: 42px; line-height: 1.45; color: var(--ink-2); max-width: 1300px; font-weight: 500; }
+  .body     { font-size: 30px; line-height: 1.55; color: var(--ink-2); }
+  .body-sm  { font-size: 26px; line-height: 1.5; color: var(--ink-3); }
+
+  /* Eyebrow override (lighter weight) */
+  .eyebrow { font-family: var(--font-body); font-weight: 700; font-size: 24px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--ink-3); }
+
+  /* Cards (override from styles.css for tighter visuals) */
+  .card { padding: 34px 38px 30px; border-radius: 22px; }
+  .card .k     { font-size: 38px; margin-bottom: 10px; }
+  .card .k-num { font-size: 64px; margin-bottom: 10px; }
+  .b-list li { font-size: 32px; line-height: 1.4; gap: 16px; }
+  .b-list li::before { width: 14px; height: 14px; margin-top: 10px; }
+  .tag { font-size: 22px; padding: 10px 20px; }
+  .tag .d { width: 8px; height: 8px; }
+  .t-data { font-size: 28px; }
+  .t-data th, .t-data td { padding: 20px 28px; }
+  .t-data th { font-size: 22px; }
+
+  /* Slide num chip */
+  .s-num { display: inline-flex; align-items: center; gap: 12px; color: var(--ink); font-weight: 700; }
+  .s-num .dot { width: 10px; height: 10px; border-radius: 50%; background: var(--accent-2); }
+
+  /* ───────── SLIDE 2 — Outline ───────── */
+  .s2 .outline-list { margin-top: 36px; display: grid; grid-template-columns: 1fr 1fr; gap: 4px 60px; flex: 1; align-content: start; }
+  .s2 .o-item {
+    display: grid; grid-template-columns: 110px 1fr 60px; gap: 22px; align-items: center;
+    padding: 22px 0; border-top: 1px solid color-mix(in oklab, var(--hairline) 22%, transparent);
+  }
+  .s2 .o-num   { font-family: var(--font-display); font-size: 56px; color: var(--accent-2); letter-spacing: -0.02em; line-height: 1; }
+  .s2 .o-ti    { font-family: var(--font-display); font-size: 38px; color: var(--ink); letter-spacing: -0.01em; line-height: 1.05; }
+  .s2 .o-arrow { color: var(--ink-3); font-size: 24px; text-align: right; }
+
+  /* ───────── SLIDE 3 — Context ───────── */
+  .s3 .layout { display: flex; flex-direction: column; gap: 40px; margin-top: 40px; flex: 1; justify-content: center; }
+  .s3 h1 { font-family: var(--font-display); font-size: 200px; line-height: 0.95; letter-spacing: -0.035em; margin: 0; color: var(--ink); }
+  .s3 h1 .go { color: var(--accent-2); }
+  .s3 .layout p { font-size: 38px; line-height: 1.5; color: var(--ink-2); margin: 0; max-width: 1400px; }
+  .s3 .layout p strong { color: var(--ink); }
+  .s3 .ribbon {
+    background: var(--ink); color: #FAEFE0;
+    border-radius: 22px; padding: 24px 32px;
+    display: flex; align-items: center; gap: 22px;
+    margin-top: 8px;
+  }
+  .s3 .ribbon .empty {
+    width: 70px; height: 70px; border-radius: 18px;
+    background: var(--accent-2); color: var(--ink);
+    display: inline-flex; align-items: center; justify-content: center;
+    font-family: var(--font-display); font-size: 60px;
+    flex-shrink: 0;
+  }
+  .s3 .ribbon .ribbon-txt {
+    font-family: var(--font-display); font-size: 36px; letter-spacing: -0.01em; line-height: 1.1;
+  }
+  .s3 .ribbon .ribbon-txt .lime { color: var(--lime); }
+
+  /* ───────── SLIDE 4 / 5 — Problem (Customer + Manager, full-bleed) ───────── */
+  .s4 .full-card {
+    margin-top: 28px; flex: 1;
+    display: flex; flex-direction: column;
+    background: var(--accent-bg);
+    border: 1px solid var(--hairline);
+    border-radius: 26px;
+    padding: 44px 56px;
+    gap: 24px;
+  }
+  .s4 .full-card.manager { background: color-mix(in oklab, var(--lime) 38%, var(--paper)); }
+  .s4 .who-tag {
+    display: inline-flex; align-items: center; gap: 14px;
+    background: var(--ink); color: #FAEFE0;
+    padding: 12px 24px; border-radius: 999px;
+    font-size: 24px; letter-spacing: 0.2em; text-transform: uppercase; font-weight: 700;
+    align-self: flex-start;
+  }
+  .s4 .who-tag .d { width: 10px; height: 10px; border-radius: 50%; background: var(--lime); }
+  .s4 .full-card.manager .who-tag .d { background: var(--accent-2); }
+  .s4 .full-card h3 {
+    margin: 0; font-family: var(--font-display);
+    font-size: 80px; line-height: 1; letter-spacing: -0.025em; color: var(--ink);
+  }
+  .s4 .full-card .p-list {
+    list-style: none; padding: 0; margin: 8px 0 0;
+    display: grid; grid-template-columns: 1fr 1fr; gap: 14px 56px;
+  }
+  .s4 .full-card .p-list li {
+    display: grid; grid-template-columns: 60px 1fr; gap: 18px; align-items: baseline;
+    padding: 18px 0;
+    border-top: 1px solid color-mix(in oklab, var(--hairline) 18%, transparent);
+  }
+  .s4 .full-card .p-list li .n {
+    font-family: var(--font-display); font-size: 44px; color: var(--accent-2); line-height: 1; letter-spacing: -0.01em;
+  }
+  .s4 .full-card.manager .p-list li .n { color: var(--ink); }
+  .s4 .full-card .p-list li .t { font-size: 32px; line-height: 1.4; color: var(--ink); font-weight: 500; }
+  .s4 .full-card .p-list li .t strong { font-weight: 700; }
+
+  /* ───────── SLIDE — Objectives ───────── */
+  .s5 .obj-grid {
+    margin-top: 32px; flex: 1;
+    display: grid; grid-template-columns: 1fr 1fr; gap: 0 60px;
+    align-content: start;
+  }
+  .s5 .obj-row {
+    display: grid; grid-template-columns: 100px 1fr;
+    gap: 22px; align-items: baseline;
+    padding: 22px 0;
+    border-top: 1px solid color-mix(in oklab, var(--hairline) 18%, transparent);
+  }
+  .s5 .obj-num { font-family: var(--font-display); font-size: 72px; color: var(--accent-2); letter-spacing: -0.02em; line-height: 1; }
+  .s5 .obj-ti  { font-family: var(--font-display); font-size: 38px; color: var(--ink); letter-spacing: -0.01em; line-height: 1.1; }
+  .s5 .obj-de  { font-size: 28px; color: var(--ink-2); line-height: 1.45; margin-top: 8px; font-weight: 500; }
+  .s5 .obj-row.dark { background: var(--ink); border-radius: 18px; border-top: 0; padding: 22px 26px; margin-top: 12px; align-items: center; }
+  .s5 .obj-row.dark .obj-num { color: var(--lime); }
+  .s5 .obj-row.dark .obj-ti  { color: #FAEFE0; }
+  .s5 .obj-row.dark .obj-de  { color: rgba(244,239,230,.7); }
+
+  /* ───────── SLIDE 6 — Definitions ───────── */
+  .s6 .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 22px; margin-top: 32px; flex: 1; }
+  .s6 .card { padding: 30px 34px; display: flex; flex-direction: column; }
+  .s6 .card .k { font-size: 38px; margin-bottom: 12px; }
+  .s6 .card .body { font-size: 28px; color: var(--ink-2); line-height: 1.45; }
+  .s6 .card .tag-row { margin-top: auto; padding-top: 16px; display: flex; flex-wrap: wrap; gap: 10px; }
+
+  /* ───────── SLIDE 7 — Solution overview ───────── */
+  .s7 .actors { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 20px; margin-top: 28px; flex: 1; }
+  .s7 .actor-card {
+    background: var(--paper); border: 1px solid var(--hairline); border-radius: 22px;
+    padding: 28px 28px; display: flex; flex-direction: column; gap: 18px;
+  }
+  .s7 .actor-card.primary { background: var(--accent-bg); }
+  .s7 .actor-card .role { display: flex; align-items: center; gap: 14px; }
+  .s7 .actor-card .role .ic {
+    width: 52px; height: 52px; border-radius: 14px; background: var(--ink);
+    display: inline-flex; align-items: center; justify-content: center; color: var(--lime); flex-shrink: 0;
+  }
+  .s7 .actor-card .role h3 { margin: 0; font-family: var(--font-display); font-size: 40px; color: var(--ink); letter-spacing: -0.005em; }
+  .s7 .actor-card .role .sub { font-size: 18px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--ink-3); font-weight: 700; margin-top: 4px; }
+  .s7 .actor-card ul { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 10px; }
+  .s7 .actor-card ul li { font-size: 28px; color: var(--ink-2); display: flex; align-items: flex-start; gap: 12px; line-height: 1.4; }
+  .s7 .actor-card ul li::before { content:""; width: 12px; height: 12px; background: var(--accent-2); border-radius: 3px; margin-top: 10px; flex-shrink: 0; }
+  .s7 .syncbar {
+    margin-top: 24px; background: var(--ink); color: #FAEFE0; border-radius: 18px;
+    padding: 16px 24px; display: flex; align-items: center; justify-content: center; gap: 18px;
+    font-size: 20px; letter-spacing: 0.2em; text-transform: uppercase; font-weight: 700;
+  }
+  .s7 .syncbar .dot { width: 10px; height: 10px; background: var(--lime); border-radius: 50%; }
+
+  /* ───────── Use case CONTENT slides ───────── */
+  .uc { display: grid; grid-template-columns: 1fr; gap: 36px; margin-top: 36px; flex: 1; align-content: start; }
+  .uc .lead { font-size: 32px; line-height: 1.5; max-width: 1500px; }
+  .uc .points { display: grid; grid-template-columns: 1fr 1fr; gap: 18px 50px; margin-top: 14px; }
+  .uc .point { display: grid; grid-template-columns: 70px 1fr; gap: 18px; align-items: baseline; padding: 18px 0; border-top: 1px solid color-mix(in oklab, var(--hairline) 18%, transparent); }
+  .uc .point .num { font-family: var(--font-display); font-size: 56px; color: var(--accent-2); line-height: 1; }
+  .uc .point .txt { font-size: 30px; color: var(--ink-2); line-height: 1.45; }
+  .uc .point .txt strong { color: var(--ink); font-weight: 700; }
+
+  /* ───────── Full-page diagram slides ───────── */
+  .diagram-page { margin-top: 28px; flex: 1; display: flex; flex-direction: column; min-height: 0; }
+  .diagram-page .figcap {
+    font-size: 20px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--ink-3); font-weight: 700; margin-bottom: 16px;
+  }
+  .diagram-page .plate-big {
+    background: #ffffff; border: 1px solid var(--hairline);
+    border-radius: 22px; box-shadow: 10px 10px 0 var(--hairline);
+    padding: 24px 32px;
+    flex: 1; min-height: 0;
+    display: flex; align-items: center; justify-content: center;
+    overflow: hidden;
+  }
+  .diagram-page .plate-big img {
+    width: 100%; height: 100%;
+    max-width: 100%; max-height: 100%;
+    object-fit: contain; display: block;
+  }
+
+  /* ───────── Recommendation slide ───────── */
+  .s-reco .layout { display: grid; grid-template-columns: 1.25fr 1fr; gap: 26px; margin-top: 30px; flex: 1; }
+  .s-reco .steps-card { background: var(--paper); border: 1px solid var(--hairline); border-radius: 22px; padding: 18px 28px; }
+  .s-reco .step { display: grid; grid-template-columns: 70px 1fr; gap: 14px; padding: 14px 0; border-bottom: 1px solid color-mix(in oklab, var(--hairline) 18%, transparent); align-items: baseline; }
+  .s-reco .step:last-child { border-bottom: none; }
+  .s-reco .step .n { font-family: var(--font-display); font-size: 44px; color: var(--accent-2); line-height: 1; }
+  .s-reco .step .ti { font-family: var(--font-display); font-size: 32px; color: var(--ink); letter-spacing: -0.005em; line-height: 1.1; }
+  .s-reco .step .de { font-size: 24px; color: var(--ink-2); line-height: 1.4; margin-top: 6px; }
+  .s-reco .formula-card { background: var(--ink); color: #FAEFE0; border-radius: 22px; padding: 28px 30px; display: flex; flex-direction: column; gap: 16px; }
+  .s-reco .formula-card h4 { font-family: var(--font-display); font-size: 34px; color: var(--lime); margin: 0; letter-spacing: -0.005em; }
+  .s-reco .formula { background: rgba(255,255,255,0.06); border-radius: 12px; padding: 20px 24px; }
+  .s-reco .formula .lab { font-size: 22px; letter-spacing: 0.22em; text-transform: uppercase; color: rgba(244,239,230,0.78); margin-bottom: 10px; font-weight: 700; }
+  .s-reco .formula .eq { font-family: "JetBrains Mono", monospace; font-size: 30px; color: #FAEFE0; line-height: 1.4; }
+  .s-reco .alpha-pill { display: inline-flex; align-items: center; gap: 6px; background: var(--lime); color: var(--ink); padding: 3px 12px; border-radius: 999px; font-weight: 700; font-size: 22px; font-family: var(--font-body); }
+
+  /* ───────── Architecture content & stack table ───────── */
+  .s-arch .arch-card { background: var(--paper); border: 1px solid var(--hairline); border-radius: 22px; padding: 4px 0; margin-top: 32px; overflow: hidden; flex: 1; }
+  .s-arch .t-data .comp { font-family: var(--font-display); color: var(--ink); font-size: 30px; letter-spacing: -0.005em; }
+  .s-arch .t-data .tech { font-family: "JetBrains Mono", monospace; font-size: 26px; color: var(--ink); background: var(--accent-bg); border-radius: 8px; padding: 6px 14px; display: inline-block; font-weight: 600; }
+  .s-arch .t-data .role { color: var(--ink-2); font-size: 26px; }
+  .s-arch .t-data tr:nth-child(even) td { background: color-mix(in oklab, var(--accent-bg) 22%, transparent); }
+
+  .arch-flow { margin-top: 36px; flex: 1; display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 22px; align-content: start; }
+  .arch-flow .pill-card { background: var(--paper); border: 1px solid var(--hairline); border-radius: 18px; padding: 22px 24px; display: flex; flex-direction: column; gap: 8px; }
+  .arch-flow .pill-card .lab { font-size: 22px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--ink-3); font-weight: 700; }
+  .arch-flow .pill-card .nm { font-family: var(--font-display); font-size: 34px; color: var(--ink); letter-spacing: -0.005em; }
+  .arch-flow .pill-card .de { font-size: 24px; color: var(--ink-2); line-height: 1.4; }
+  .arch-flow .pill-card.ink { background: var(--ink); }
+  .arch-flow .pill-card.ink .nm { color: #FAEFE0; }
+  .arch-flow .pill-card.ink .de { color: rgba(244,239,230,.7); }
+  .arch-flow .pill-card.ink .lab { color: var(--lime); }
+  .arch-flow .pill-card.lav { background: var(--accent-bg); }
+
+  /* ───────── Interface · Mobile App ───────── */
+  .mobile-grid {
+    margin-top: 32px;
+    flex: 1; min-height: 0;
+    display: grid; grid-template-columns: repeat(6, 1fr); gap: 20px; align-items: stretch;
+  }
+  .mobile-grid .phone {
+    background: var(--hairline);
+    border-radius: 28px; padding: 10px;
+    box-shadow: 0 30px 80px -30px rgba(14,14,20,.45);
+    display: flex; flex-direction: column;
+    overflow: hidden;
+  }
+  .mobile-grid .phone .scr {
+    flex: 1; min-height: 0;
+    border-radius: 22px; overflow: hidden;
+    background: var(--bg);
+  }
+  .mobile-grid .phone .scr img {
+    width: 100%; height: 100%;
+    object-fit: cover; object-position: top;
+    display: block;
+  }
+  .mobile-grid .phone .cap {
+    margin-top: 12px;
+    font-size: 20px; letter-spacing: 0.2em; text-transform: uppercase;
+    color: rgba(244,239,230,.78); font-weight: 700; text-align: center;
+    padding-bottom: 6px;
+  }
+
+  /* ───────── Interface · Dashboard (clean, no mockup chrome) ───────── */
+  .dash-show { margin-top: 28px; flex: 1; display: flex; flex-direction: column; min-height: 0; align-items: center; }
+  .dash-show .frame {
+    width: 86%;
+    flex: 1; min-height: 0;
+    border-radius: 18px;
+    border: 1px solid var(--hairline);
+    box-shadow: 18px 18px 0 var(--accent-2);
+    background: #fff;
+    overflow: hidden;
+    display: flex; align-items: stretch; justify-content: center;
+  }
+  .dash-show .frame img {
+    width: 100%; height: 100%;
+    object-fit: cover; object-position: top;
+    display: block;
+  }
+
+  /* ───────── What we built / Future improvements ───────── */
+  .built-grid { margin-top: 38px; flex: 1; display: grid; grid-template-columns: repeat(2, 1fr); gap: 22px; align-content: start; }
+  .built-card {
+    background: var(--paper); border: 1px solid var(--hairline); border-radius: 22px;
+    padding: 32px 36px;
+    display: flex; flex-direction: column; gap: 16px;
+  }
+  .built-card.lav  { background: var(--accent-bg); }
+  .built-card.ink  { background: var(--ink); color: #FAEFE0; }
+  .built-card .nm  { font-family: var(--font-display); font-size: 36px; color: var(--ink); letter-spacing: -0.01em; }
+  .built-card.ink .nm { color: #FAEFE0; }
+  .built-card .de  { font-size: 28px; color: var(--ink-2); line-height: 1.5; }
+  .built-card.ink .de { color: rgba(244,239,230,.78); }
+  .built-card .pill {
+    align-self: flex-start; background: var(--ink); color: var(--lime);
+    padding: 8px 18px; border-radius: 999px;
+    font-size: 20px; font-weight: 700; letter-spacing: 0.22em; text-transform: uppercase;
+  }
+  .built-card.ink .pill { background: var(--lime); color: var(--ink); }
+
+  /* ───────── Demonstration title ───────── */
+  .demo-title {
+    flex: 1; display: flex; flex-direction: column;
+    justify-content: center; gap: 28px;
+    margin-top: 30px;
+  }
+  .demo-title .logo-mark { display: flex; align-items: center; gap: 22px; }
+  .demo-title .logo-mark img { width: 80px; height: 80px; }
+  .demo-title .logo-mark .wm { font-family: var(--font-display); font-size: 44px; color: var(--ink); letter-spacing: -0.025em; }
+  .demo-title .logo-mark .wm .go { color: var(--accent-2); }
+  .demo-title h1 {
+    font-family: var(--font-display); font-size: 200px; line-height: 0.92;
+    margin: 0; letter-spacing: -0.04em; color: var(--ink);
+  }
+  .demo-title h1 .accent { color: var(--accent-2); }
+  .demo-title .sub {
+    font-size: 32px; color: var(--ink-2); line-height: 1.4; max-width: 1100px;
+    font-weight: 500; margin: 0;
+  }
+  .demo-title .ticks {
+    display: flex; gap: 14px; flex-wrap: wrap;
+  }
+  .demo-title .tick {
+    background: var(--ink); color: #FAEFE0;
+    border-radius: 999px;
+    padding: 10px 22px;
+    font-size: 22px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase;
+    display: inline-flex; align-items: center; gap: 8px;
+  }
+  .demo-title .tick.alt { background: var(--accent-bg); color: var(--ink); }
+  .demo-title .tick .num { color: var(--lime); }
+  .demo-title .tick.alt .num { color: var(--accent-2); }
+
+  /* ───────── Client profile slide ───────── */
+  .profile { margin-top: 28px; flex: 1; display: grid; grid-template-columns: 0.85fr 1.15fr; gap: 36px; align-items: stretch; }
+
+  .profile .who {
+    background: var(--ink); color: #FAEFE0;
+    border-radius: 26px;
+    padding: 0;
+    display: flex; flex-direction: column;
+    box-shadow: 14px 14px 0 var(--accent-2);
+    position: relative; overflow: hidden;
+  }
+  .profile .who .photo {
+    flex: 1; min-height: 0;
+    background: var(--accent-bg);
+    overflow: hidden;
+    display: flex; align-items: stretch; justify-content: stretch;
+    border-bottom: 1px solid rgba(255,255,255,.06);
+  }
+  .profile .who .photo image-slot {
+    width: 100%; height: 100%;
+    --image-slot-placeholder-bg: var(--accent-bg);
+    --image-slot-placeholder-color: var(--ink-3);
+  }
+  .profile .who .photo img {
+    width: 100%; height: 100%;
+    object-fit: cover; object-position: center;
+    display: block;
+  }
+  .profile .who .info {
+    padding: 28px 36px 32px;
+    display: flex; flex-direction: column; gap: 14px;
+    position: relative; z-index: 1;
+  }
+  .profile .who .lbl {
+    font-size: 22px; letter-spacing: 0.24em; text-transform: uppercase;
+    color: var(--lime); font-weight: 700;
+  }
+  .profile .who .nm {
+    font-family: var(--font-display); font-size: 96px;
+    letter-spacing: -0.03em; line-height: 0.95; margin: 0;
+  }
+  .profile .who .role {
+    font-size: 26px; color: rgba(244,239,230,.78); line-height: 1.45;
+  }
+  .profile .who .role strong { color: #FAEFE0; font-weight: 600; }
+
+  .profile .facts { display: flex; flex-direction: column; gap: 18px; }
+  .profile .fact {
+    background: var(--paper); border: 1px solid var(--hairline);
+    border-radius: 22px; padding: 24px 32px;
+    display: grid; grid-template-columns: 64px 1fr; gap: 22px; align-items: center;
+  }
+  .profile .fact.lav  { background: var(--accent-bg); }
+  .profile .fact.lime { background: color-mix(in oklab, var(--lime) 45%, var(--paper)); }
+  .profile .fact .ic {
+    width: 60px; height: 60px; border-radius: 16px;
+    background: var(--ink); color: var(--lime);
+    display: inline-flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+  }
+  .profile .fact .lab {
+    font-size: 22px; letter-spacing: 0.22em; text-transform: uppercase;
+    color: var(--ink-3); font-weight: 700;
+  }
+  .profile .fact .val {
+    font-family: var(--font-display); font-size: 38px; color: var(--ink);
+    letter-spacing: -0.005em; line-height: 1.1; margin-top: 6px;
+  }
+  .profile .fact-tags {
+    display: flex; flex-wrap: wrap; gap: 10px; margin-top: 10px;
+  }
+  .profile .fact-tags .chip {
+    background: var(--ink); color: #FAEFE0;
+    padding: 8px 18px; border-radius: 999px;
+    font-size: 22px; font-weight: 600; letter-spacing: 0.04em;
+    display: inline-flex; align-items: center; gap: 8px;
+  }
+  .profile .fact-tags .chip.warn { background: var(--accent-2); color: var(--ink); }
+  .profile .fact-tags .chip.none { background: color-mix(in oklab, var(--lime) 60%, var(--paper)); color: var(--ink); }
+  .profile .fact-tags .chip .dot { width: 7px; height: 7px; border-radius: 50%; background: var(--lime); }
+  .profile .fact-tags .chip.warn .dot { background: var(--ink); }
+
+  /* ───────── Demonstration / Thanks ───────── */
+  .demo {
+    flex: 1; display: flex; flex-direction: column;
+    align-items: center; justify-content: center; gap: 36px;
+    margin-top: 60px; text-align: center;
+  }
+  .demo .logo-mark { display: flex; align-items: center; gap: 24px; }
+  .demo .logo-mark img { width: 140px; height: 140px; }
+  .demo .logo-mark .wm { font-family: var(--font-display); font-size: 72px; color: var(--ink); letter-spacing: -0.025em; }
+  .demo .logo-mark .wm .go { color: var(--accent-2); }
+  .demo h2 { font-family: var(--font-display); font-size: 200px; line-height: 0.9; margin: 0; letter-spacing: -0.035em; color: var(--ink); }
+  .demo h2 .accent { color: var(--accent-2); }
+  .demo .qa {
+    background: var(--ink); color: #FAEFE0;
+    border-radius: 999px; padding: 18px 40px;
+    font-size: 24px; letter-spacing: 0.22em; text-transform: uppercase; font-weight: 700;
+  }
+  .demo .qa .lime { color: var(--lime); }
+
+</style>
+</head>
+<body>
+
+<deck-stage width="1920" height="1080">
+
+  <!-- ════════════ SLIDE 1 — COVER ════════════ -->
+  <section class="cover" data-screen-label="01 Cover">
+    <div class="top-bar">
+      <span>USTHB · Faculty of Computer Science</span>
+      <span class="dept">Defense · 2026</span>
+    </div>
+
+    <div class="stage">
+      <div class="logo-row">
+        <img src="assets/cartygo-logo.png" alt="CartyGo logo">
+        <div class="wordmark">Carty<span class="go">Go</span></div>
+      </div>
+      <h1>Smart cart.<br>Smarter <span class="accent">store.</span></h1>
+      <p class="tagline">An intelligent supermarket built around connected carts —<br>real-time sync between the customer, the cart and the store.</p>
+    </div>
+
+    <div class="meta">
+      <div>
+        <div class="lab">Authors</div>
+        <div class="val">SAIDI M. Adnane &nbsp;·&nbsp; SAIDI E. Amir<br>BELFERKOUS Imene &nbsp;·&nbsp; CHEURFI Khadidja</div>
+      </div>
+      <div>
+        <div class="lab">Supervisor</div>
+        <div class="val">Pr. BOUYAKOUB F. M'hamed</div>
+      </div>
+      <div>
+        <div class="lab">Academic year</div>
+        <div class="val">2025 / 2026</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════ SLIDE 2 — OUTLINE ════════════ -->
+  <section class="s2" data-screen-label="02 Outline">
+    <div class="slide-pad">
+      <div class="s-head">
+        <div class="s-brand"><img src="assets/cartygo-logo.png" alt=""><b>Carty<span class="go">Go</span></b></div>
+        <div class="s-num"><span class="dot"></span><span>02 / 29</span></div>
+        <div class="s-pill"><span class="pill-dot"></span>Presentation Plan</div>
+      </div>
+      <div class="s-rule"></div>
+
+      <div style="margin-top: 40px;">
+        <h2 class="h-big">What we'll cover.</h2>
+      </div>
+
+      <div class="outline-list">
+        <div class="o-item"><div class="o-num">01</div><div class="o-ti">Introduction</div><div class="o-arrow">→</div></div>
+        <div class="o-item"><div class="o-num">02</div><div class="o-ti">Objectives</div><div class="o-arrow">→</div></div>
+        <div class="o-item"><div class="o-num">03</div><div class="o-ti">Key Definitions</div><div class="o-arrow">→</div></div>
+        <div class="o-item"><div class="o-num">04</div><div class="o-ti">Proposed Solution</div><div class="o-arrow">→</div></div>
+        <div class="o-item"><div class="o-num">05</div><div class="o-ti">Conception</div><div class="o-arrow">→</div></div>
+        <div class="o-item"><div class="o-num">06</div><div class="o-ti">Recommendation System</div><div class="o-arrow">→</div></div>
+        <div class="o-item"><div class="o-num">07</div><div class="o-ti">Technical Architecture</div><div class="o-arrow">→</div></div>
+        <div class="o-item"><div class="o-num">08</div><div class="o-ti">Interfaces</div><div class="o-arrow">→</div></div>
+        <div class="o-item"><div class="o-num">09</div><div class="o-ti">Conclusion &amp; Perspectives</div><div class="o-arrow">→</div></div>
+        <div class="o-item"><div class="o-num">10</div><div class="o-ti">Demonstration</div><div class="o-arrow">→</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════ SLIDE 3 — CONTEXT ════════════ -->
+  <section class="s3" data-screen-label="03 Context">
+    <div class="slide-pad">
+      <div class="s-head">
+        <div class="s-brand"><img src="assets/cartygo-logo.png" alt=""><b>Carty<span class="go">Go</span></b></div>
+        <div class="s-num"><span class="dot"></span><span>03 / 29</span></div>
+        <div class="s-pill"><span class="pill-dot"></span>01 · Introduction</div>
+      </div>
+      <div class="s-rule"></div>
+
+      <div class="layout">
+        <h1>Going digital.</h1>
+        <p>Around the world, supermarkets rely on modern digital tools to improve the shopping experience and store management. In <strong>Algeria</strong>, however, most still operate with traditional methods.</p>
+        <div class="ribbon">
+          <div class="empty">∅</div>
+          <div class="ribbon-txt">No complete <span class="lime">local solution</span> exists to digitalize the Algerian in-store experience.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════ SLIDE 4 — PROBLEM · CUSTOMER ════════════ -->
+  <section class="s4" data-screen-label="04 Problem · Customer">
+    <div class="slide-pad">
+      <div class="s-head">
+        <div class="s-brand"><img src="assets/cartygo-logo.png" alt=""><b>Carty<span class="go">Go</span></b></div>
+        <div class="s-num"><span class="dot"></span><span>04 / 29</span></div>
+        <div class="s-pill"><span class="pill-dot"></span>01 · Introduction</div>
+      </div>
+      <div class="s-rule"></div>
+
+      <div style="margin-top: 28px;">
+        <h2 class="h-big">Identified problems <span style="color: var(--ink-3);">— for the customer.</span></h2>
+      </div>
+
+      <div class="full-card">
+        <span class="who-tag"><span class="d"></span>For the Customer</span>
+        <h3>5 frictions <span style="color: var(--accent-2);">in every visit.</span></h3>
+        <ul class="p-list">
+          <li><span class="n">01</span><span class="t">Time lost <strong>searching for products</strong> in aisles.</span></li>
+          <li><span class="n">02</span><span class="t"><strong>Long queues</strong> at checkout.</span></li>
+          <li><span class="n">03</span><span class="t">No <strong>personalized recommendations</strong>.</span></li>
+          <li><span class="n">04</span><span class="t">No <strong>real-time budget tracking</strong>.</span></li>
+          <li><span class="n">05</span><span class="t">No <strong>intelligent cart management</strong>.</span></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════ SLIDE 5 — PROBLEM · MANAGER ════════════ -->
+  <section class="s4" data-screen-label="05 Problem · Manager">
+    <div class="slide-pad">
+      <div class="s-head">
+        <div class="s-brand"><img src="assets/cartygo-logo.png" alt=""><b>Carty<span class="go">Go</span></b></div>
+        <div class="s-num"><span class="dot"></span><span>05 / 29</span></div>
+        <div class="s-pill"><span class="pill-dot"></span>01 · Introduction</div>
+      </div>
+      <div class="s-rule"></div>
+
+      <div style="margin-top: 28px;">
+        <h2 class="h-big">Identified problems <span style="color: var(--ink-3);">— for the manager.</span></h2>
+      </div>
+
+      <div class="full-card manager">
+        <span class="who-tag"><span class="d"></span>For the Manager</span>
+        <h3>3 blind spots <span style="color: var(--accent-2);">in store operations.</span></h3>
+        <ul class="p-list">
+          <li><span class="n">01</span><span class="t">Limited <strong>visibility on stock</strong> and expiry dates.</span></li>
+          <li><span class="n">02</span><span class="t">No link between <strong>in-store experience</strong> and internal operations.</span></li>
+          <li><span class="n">03</span><span class="t">Manual <strong>product &amp; promotion management</strong> — slow and error-prone.</span></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════ SLIDE 5 — OBJECTIVES ════════════ -->
+  <section class="s5" data-screen-label="06 Objectives">
+    <div class="slide-pad">
+      <div class="s-head">
+        <div class="s-brand"><img src="assets/cartygo-logo.png" alt=""><b>Carty<span class="go">Go</span></b></div>
+        <div class="s-num"><span class="dot"></span><span>06 / 29</span></div>
+        <div class="s-pill"><span class="pill-dot"></span>02 · Objectives</div>
+      </div>
+      <div class="s-rule"></div>
+
+      <div style="margin-top: 32px;">
+        <h2 class="h-big">What we aim <span style="color: var(--ink-3);">to deliver.</span></h2>
+      </div>
+
+      <div class="obj-grid">
+        <div class="obj-row">
+          <div class="obj-num">01</div>
+          <div>
+            <div class="obj-ti">Pleasant customer experience</div>
+            <div class="obj-de">Real-time sync between the smartphone, the connected cart and the store.</div>
+          </div>
+        </div>
+        <div class="obj-row">
+          <div class="obj-num">02</div>
+          <div>
+            <div class="obj-ti">Seamless barcode management</div>
+            <div class="obj-de">From physical scan on the cart to the customer's phone, instantly.</div>
+          </div>
+        </div>
+        <div class="obj-row">
+          <div class="obj-num">03</div>
+          <div>
+            <div class="obj-ti">Purchase transparency</div>
+            <div class="obj-de">Live cart view and running total — no surprises at checkout.</div>
+          </div>
+        </div>
+        <div class="obj-row">
+          <div class="obj-num">04</div>
+          <div>
+            <div class="obj-ti">Personalized recommendations</div>
+            <div class="obj-de">Built from purchase history, preferences and health profile.</div>
+          </div>
+        </div>
+        <div class="obj-row">
+          <div class="obj-num">05</div>
+          <div>
+            <div class="obj-ti">Cross-selling &amp; promotions</div>
+            <div class="obj-de">Similar items, targeted alerts and time-limited offers.</div>
+          </div>
+        </div>
+        <div class="obj-row">
+          <div class="obj-num">06</div>
+          <div>
+            <div class="obj-ti">Manager dashboard</div>
+            <div class="obj-de">Live stock, sales and performance metrics in one place.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════ SLIDE 6 — DEFINITIONS ════════════ -->
+  <section class="s6" data-screen-label="07 Definitions">
+    <div class="slide-pad">
+      <div class="s-head">
+        <div class="s-brand"><img src="assets/cartygo-logo.png" alt=""><b>Carty<span class="go">Go</span></b></div>
+        <div class="s-num"><span class="dot"></span><span>07 / 29</span></div>
+        <div class="s-pill"><span class="pill-dot"></span>03 · Background</div>
+      </div>
+      <div class="s-rule"></div>
+
+      <div style="margin-top: 28px;">
+        <h2 class="h-big">Background.</h2>
+      </div>
+
+      <div class="grid">
+        <div class="card">
+          <div class="k">Internet of Things <span style="color: var(--ink-3); font-size: 22px; font-weight: 400; font-family: var(--font-body); letter-spacing: 0.12em;">/ IoT</span></div>
+          <div class="body">A technological ecosystem that connects physical objects to a network and enables data exchange with little or no human intervention.</div>
+          <div class="tag-row">
+            <span class="tag">AI</span><span class="tag">Cloud</span><span class="tag">Sensors</span>
+          </div>
+        </div>
+        <div class="card card-lav">
+          <div class="k">Smart Supermarket</div>
+          <div class="body">A self-service supermarket integrating AI, sensors, cameras, electronic labels and mobile apps.</div>
+          <div class="tag-row">
+            <span class="tag ink"><span class="d"></span>Self-checkout</span>
+            <span class="tag ink"><span class="d"></span>Cashier-less</span>
+            <span class="tag ink"><span class="d"></span>Connected carts</span>
+          </div>
+        </div>
+        <div class="card">
+          <div class="k">Connected Cart</div>
+          <div class="body">A cart equipped with cameras, sensors, barcode &middot; QR &middot; RFID readers and a screen — linked to the store and the customer's mobile app.</div>
+          <div class="tag-row">
+            <span class="tag lime"><span class="d"></span>Data collection</span>
+            <span class="tag lime"><span class="d"></span>Recommendations</span>
+            <span class="tag lime"><span class="d"></span>Integrated payment</span>
+          </div>
+        </div>
+        <div class="card card-ink">
+          <div class="k" style="color: #FAEFE0;">Recommendation System</div>
+          <div class="body" style="color: rgba(244,239,230,.78);">Software that suggests the most relevant products based on user profile and purchase history.</div>
+          <div class="tag-row">
+            <span class="tag"><span class="d" style="background: var(--ink);"></span>Content-based</span>
+            <span class="tag"><span class="d" style="background: var(--ink);"></span>Collaborative</span>
+            <span class="tag lime"><span class="d"></span>Hybrid — CartyGo</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════ SLIDE 7 — SOLUTION OVERVIEW ════════════ -->
+  <section class="s7" data-screen-label="08 Solution Overview">
+    <div class="slide-pad">
+      <div class="s-head">
+        <div class="s-brand"><img src="assets/cartygo-logo.png" alt=""><b>Carty<span class="go">Go</span></b></div>
+        <div class="s-num"><span class="dot"></span><span>08 / 29</span></div>
+        <div class="s-pill"><span class="pill-dot"></span>04 · Our Solution</div>
+      </div>
+      <div class="s-rule"></div>
+
+      <div style="margin-top: 28px;">
+        <h2 class="h-big">Three actors, one ecosystem.</h2>
+        <p class="body" style="margin-top: 16px; max-width: 1380px;">
+          A centralized digital system linking the three actors of the supermarket — with real-time communication and constant synchronization between the mobile app, the connected cart and the web dashboard.
+        </p>
+      </div>
+
+      <div class="actors">
+        <div class="actor-card primary">
+          <div class="role">
+            <div class="ic"><svg width="26" height="26" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="8" r="3.5" stroke="currentColor" stroke-width="2"/><path d="M4 20c0-4 4-6 8-6s8 2 8 6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></div>
+            <div>
+              <h3>Customer</h3>
+              <div class="sub">Mobile app</div>
+            </div>
+          </div>
+          <ul>
+            <li>Browse products live</li>
+            <li>Track cart &amp; total live</li>
+            <li>Receive recommendations</li>
+            <li>Pay from smartphone</li>
+          </ul>
+        </div>
+        <div class="actor-card">
+          <div class="role">
+            <div class="ic"><svg width="26" height="26" viewBox="0 0 24 24" fill="none"><rect x="3" y="5" width="18" height="14" rx="2" stroke="currentColor" stroke-width="2"/><path d="M7 10v6M11 8v8M15 12v4M19 9v7" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></div>
+            <div>
+              <h3>Manager</h3>
+              <div class="sub">Web dashboard</div>
+            </div>
+          </div>
+          <ul>
+            <li>Real-time store overview</li>
+            <li>Sales &amp; performance stats</li>
+            <li>Manage products &amp; promotions</li>
+          </ul>
+        </div>
+        <div class="actor-card">
+          <div class="role">
+            <div class="ic"><svg width="26" height="26" viewBox="0 0 24 24" fill="none"><path d="M3 7l9-4 9 4-9 4-9-4z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M3 12l9 4 9-4M3 17l9 4 9-4" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg></div>
+            <div>
+              <h3>Cashier</h3>
+              <div class="sub">Web dashboard</div>
+            </div>
+          </div>
+          <ul>
+            <li>Confirm cash purchases</li>
+            <li>Verify transactions</li>
+            <li>Validate payment conformity</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="syncbar">
+        <span class="dot"></span>
+        <span>Mobile app &nbsp;⇄&nbsp; Connected cart &nbsp;⇄&nbsp; Web dashboard</span>
+        <span class="dot"></span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════ SLIDE 8 — UC · PRODUCT MGMT (CONTENT) ════════════ -->
+  <section class="uc-section" data-screen-label="09 UC Product Management — Content">
+    <div class="slide-pad">
+      <div class="s-head">
+        <div class="s-brand"><img src="assets/cartygo-logo.png" alt=""><b>Carty<span class="go">Go</span></b></div>
+        <div class="s-num"><span class="dot"></span><span>09 / 29</span></div>
+        <div class="s-pill"><span class="pill-dot"></span>05 · Conception — Use Case 6.1</div>
+      </div>
+      <div class="s-rule"></div>
+
+      <div style="margin-top: 28px;">
+        <h2 class="h-big">Product Management <span style="color: var(--ink-3);">— Client.</span></h2>
+      </div>
+
+      <div class="uc">
+        <p class="lead">After registration, the customer provides personal info and selections — preferred categories, health profile and allergies. After authentication, they can browse the catalogue, search products, and scan items via the smart cart.</p>
+        <div class="points">
+          <div class="point"><span class="num">01</span><span class="txt"><strong>Register &amp; authenticate</strong> with email and OTP recovery.</span></div>
+          <div class="point"><span class="num">02</span><span class="txt"><strong>Personalize profile</strong> — categories, health data, allergies.</span></div>
+          <div class="point"><span class="num">03</span><span class="txt"><strong>Browse, search and scan</strong> products through the cart tablet.</span></div>
+          <div class="point"><span class="num">04</span><span class="txt">Each scanned item is added live to the <strong>virtual cart</strong>.</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════ SLIDE 9 — UC · PRODUCT MGMT (DIAGRAM) ════════════ -->
+  <section data-screen-label="10 UC Product Management — Diagram">
+    <div class="slide-pad tight">
+      <div class="s-head">
+        <div class="s-brand"><img src="assets/cartygo-logo.png" alt=""><b>Carty<span class="go">Go</span></b></div>
+        <div class="s-num"><span class="dot"></span><span>10 / 29</span></div>
+        <div class="s-pill"><span class="pill-dot"></span>Fig. 6.1 · Use Case Diagram</div>
+      </div>
+      <div class="s-rule"></div>
+
+      <div class="diagram-page">
+        <div class="figcap">Fig. 6.1 — Use Case · Product Management (Client)</div>
+        <div class="plate-big"><img src="assets/diagram-uc-client-product.png" alt=""></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════ SLIDE 10 — UC · PAYMENT (CONTENT) ════════════ -->
+  <section class="uc-section" data-screen-label="11 UC Payment — Content">
+    <div class="slide-pad">
+      <div class="s-head">
+        <div class="s-brand"><img src="assets/cartygo-logo.png" alt=""><b>Carty<span class="go">Go</span></b></div>
+        <div class="s-num"><span class="dot"></span><span>11 / 29</span></div>
+        <div class="s-pill"><span class="pill-dot"></span>05 · Conception — Use Case 6.2</div>
+      </div>
+      <div class="s-rule"></div>
+
+      <div style="margin-top: 28px;">
+        <h2 class="h-big">Payment &amp; Purchase Confirmation.</h2>
+      </div>
+
+      <div class="uc">
+        <p class="lead">To finalize the purchase, the customer chooses a payment method: electronic (bank card via <strong>Chargily Pay</strong>) or cash. The system automatically applies any promotions or discount codes set by the manager.</p>
+        <div class="points">
+          <div class="point"><span class="num">01</span><span class="txt">Review the final cart with the running total.</span></div>
+          <div class="point"><span class="num">02</span><span class="txt"><strong>Apply promotions / discount codes</strong> defined by the manager.</span></div>
+          <div class="point"><span class="num">03</span><span class="txt">Choose payment method — electronic (CIB &middot; Dahabia) or cash.</span></div>
+          <div class="point"><span class="num">04</span><span class="txt">Receive purchase confirmation and digital receipt.</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════ SLIDE 11 — UC · PAYMENT (DIAGRAM) ════════════ -->
+  <section data-screen-label="12 UC Payment — Diagram">
+    <div class="slide-pad tight">
+      <div class="s-head">
+        <div class="s-brand"><img src="assets/cartygo-logo.png" alt=""><b>Carty<span class="go">Go</span></b></div>
+        <div class="s-num"><span class="dot"></span><span>12 / 29</span></div>
+        <div class="s-pill"><span class="pill-dot"></span>Fig. 6.2 · Use Case Diagram</div>
+      </div>
+      <div class="s-rule"></div>
+
+      <div class="diagram-page">
+        <div class="figcap">Fig. 6.2 — Use Case · Payment &amp; Purchase Confirmation</div>
+        <div class="plate-big"><img src="assets/diagram-uc-client-payment.png" alt=""></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════ SLIDE 12 — UC · MANAGER (CONTENT) ════════════ -->
+  <section class="uc-section" data-screen-label="13 UC Manager — Content">
+    <div class="slide-pad">
+      <div class="s-head">
+        <div class="s-brand"><img src="assets/cartygo-logo.png" alt=""><b>Carty<span class="go">Go</span></b></div>
+        <div class="s-num"><span class="dot"></span><span>13 / 29</span></div>
+        <div class="s-pill"><span class="pill-dot"></span>05 · Conception — Use Case 6.4</div>
+      </div>
+      <div class="s-rule"></div>
+
+      <div style="margin-top: 28px;">
+        <h2 class="h-big">Products &amp; Promotions <span style="color: var(--ink-3);">— Manager.</span></h2>
+      </div>
+
+      <div class="uc">
+        <p class="lead">After authentication, the manager handles the product catalogue (add, modify, delete) and creates / manages promotions. Goal: stimulate sales and keep the catalogue up to date.</p>
+        <div class="points">
+          <div class="point"><span class="num">01</span><span class="txt"><strong>Authenticate</strong> as manager via JWT + bcrypt.</span></div>
+          <div class="point"><span class="num">02</span><span class="txt">Manage products — <strong>add / modify / delete</strong>.</span></div>
+          <div class="point"><span class="num">03</span><span class="txt">Create &amp; manage <strong>promotions</strong> targeted to categories or users.</span></div>
+          <div class="point"><span class="num">04</span><span class="txt">Monitor <strong>stock</strong> and <strong>expiry dates</strong> in real time.</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════ SLIDE 13 — UC · MANAGER (DIAGRAM) ════════════ -->
+  <section data-screen-label="14 UC Manager — Diagram">
+    <div class="slide-pad tight">
+      <div class="s-head">
+        <div class="s-brand"><img src="assets/cartygo-logo.png" alt=""><b>Carty<span class="go">Go</span></b></div>
+        <div class="s-num"><span class="dot"></span><span>14 / 29</span></div>
+        <div class="s-pill"><span class="pill-dot"></span>Fig. 6.4 · Use Case Diagram</div>
+      </div>
+      <div class="s-rule"></div>
+
+      <div class="diagram-page">
+        <div class="figcap">Fig. 6.4 — Use Case · Products and Promotions Management</div>
+        <div class="plate-big"><img src="assets/diagram-uc-manager.png" alt=""></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════ SLIDE 14 — UC · CASHIER (CONTENT) ════════════ -->
+  <section class="uc-section" data-screen-label="15 UC Cashier — Content">
+    <div class="slide-pad">
+      <div class="s-head">
+        <div class="s-brand"><img src="assets/cartygo-logo.png" alt=""><b>Carty<span class="go">Go</span></b></div>
+        <div class="s-num"><span class="dot"></span><span>15 / 29</span></div>
+        <div class="s-pill"><span class="pill-dot"></span>05 · Conception — Use Case 6.6</div>
+      </div>
+      <div class="s-rule"></div>
+
+      <div style="margin-top: 28px;">
+        <h2 class="h-big">Cash Payment <span style="color: var(--ink-3);">— Cashier.</span></h2>
+      </div>
+
+      <div class="uc">
+        <p class="lead">The cashier intervenes mainly in the cash payment process. They validate transactions made at the till and verify payment conformity before final confirmation in the system.</p>
+        <div class="points">
+          <div class="point"><span class="num">01</span><span class="txt"><strong>Authenticate</strong> as cashier through the dashboard.</span></div>
+          <div class="point"><span class="num">02</span><span class="txt">Receive incoming <strong>cash-payment requests</strong> from clients.</span></div>
+          <div class="point"><span class="num">03</span><span class="txt"><strong>Verify conformity</strong> — amount received vs cart total.</span></div>
+          <div class="point"><span class="num">04</span><span class="txt"><strong>Validate &amp; confirm</strong> the transaction in the system.</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════ SLIDE 15 — UC · CASHIER (DIAGRAM) ════════════ -->
+  <section data-screen-label="16 UC Cashier — Diagram">
+    <div class="slide-pad tight">
+      <div class="s-head">
+        <div class="s-brand"><img src="assets/cartygo-logo.png" alt=""><b>Carty<span class="go">Go</span></b></div>
+        <div class="s-num"><span class="dot"></span><span>16 / 29</span></div>
+        <div class="s-pill"><span class="pill-dot"></span>Fig. 6.6 · Use Case Diagram</div>
+      </div>
+      <div class="s-rule"></div>
+
+      <div class="diagram-page">
+        <div class="figcap">Fig. 6.6 — Use Case · Cash Payment Management</div>
+        <div class="plate-big"><img src="assets/diagram-uc-cashier.png" alt=""></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════ SLIDE 16 — SEQUENCE (CONTENT) ════════════ -->
+  <section data-screen-label="17 Sequence — Content">
+    <div class="slide-pad">
+      <div class="s-head">
+        <div class="s-brand"><img src="assets/cartygo-logo.png" alt=""><b>Carty<span class="go">Go</span></b></div>
+        <div class="s-num"><span class="dot"></span><span>17 / 29</span></div>
+        <div class="s-pill"><span class="pill-dot"></span>05 · Conception — Sequence</div>
+      </div>
+      <div class="s-rule"></div>
+
+      <div style="margin-top: 32px;">
+        <h2 class="h-big">The purchase process,<br>in flight.</h2>
+      </div>
+
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 60px; margin-top: 48px; flex: 1; align-items: start;">
+        <div style="display: flex; flex-direction: column; gap: 22px;">
+          <p class="lead-lg">After authentication, the customer scans product barcodes in a loop. Each scan triggers a database request to fetch product info — the cart content is then synchronized in real time with the user's profile.</p>
+          <p class="lead" style="color: var(--ink-3);">Once the customer is done, the final list is displayed and the payment module is activated.</p>
+        </div>
+
+        <div style="display: flex; gap: 28px; align-items: flex-end; justify-content: center;">
+          <div class="iphone" style="width: 260px;"><div class="notch"></div><div class="scr"><img src="assets/app-connecting.png" alt="Cart connecting"></div></div>
+          <div class="iphone" style="width: 260px; margin-bottom: 60px;"><div class="notch"></div><div class="scr"><img src="assets/app-connect-cart-v2.png" alt="QR scan"></div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════ SLIDE 17 — SEQUENCE (DIAGRAM) ════════════ -->
+  <section data-screen-label="18 Sequence — Diagram">
+    <div class="slide-pad tight">
+      <div class="s-head">
+        <div class="s-brand"><img src="assets/cartygo-logo.png" alt=""><b>Carty<span class="go">Go</span></b></div>
+        <div class="s-num"><span class="dot"></span><span>18 / 29</span></div>
+        <div class="s-pill"><span class="pill-dot"></span>Fig. 6.7 · Sequence Diagram</div>
+      </div>
+      <div class="s-rule"></div>
+
+      <div class="diagram-page">
+        <div class="figcap">Fig. 6.7 — Sequence Diagram · Purchase Process</div>
+        <div class="plate-big"><img src="assets/diagram-sequence.png" alt=""></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════ SLIDE 18 — RECOMMENDATION SYSTEM ════════════ -->
+  <section class="s-reco" data-screen-label="19 Recommendation System">
+    <div class="slide-pad">
+      <div class="s-head">
+        <div class="s-brand"><img src="assets/cartygo-logo.png" alt=""><b>Carty<span class="go">Go</span></b></div>
+        <div class="s-num"><span class="dot"></span><span>19 / 29</span></div>
+        <div class="s-pill"><span class="pill-dot"></span>06 · Recommendation System</div>
+      </div>
+      <div class="s-rule"></div>
+
+      <div style="margin-top: 28px;">
+        <h2 class="h-big">Collaborative <span style="color: var(--ink-3);">+ Content-based.</span></h2>
+        <p class="body" style="margin-top: 14px; max-width: 1380px;">A hybrid pipeline that blends both approaches — collaborative filtering finds neighbours, content-based filtering finds similar products, then a weighted score combines them.</p>
+      </div>
+
+      <div class="layout">
+        <div class="steps-card">
+          <div class="eyebrow" style="margin-bottom: 4px;">Pipeline</div>
+          <div class="step"><div class="n">01</div><div><div class="ti">Data Collection</div><div class="de">Purchase history, browsing, profile &amp; ratings.</div></div></div>
+          <div class="step"><div class="n">02</div><div><div class="ti">Collaborative Filtering</div><div class="de">Jaccard similarity over user-item interactions.</div></div></div>
+          <div class="step"><div class="n">03</div><div><div class="ti">Content-Based Filtering</div><div class="de">Category, allergen and health-profile matching.</div></div></div>
+          <div class="step"><div class="n">04</div><div><div class="ti">Final Score</div><div class="de">Score<sub>final</sub>(p) = <span class="alpha-pill">α = 0.7</span> · Score<sub>CF</sub> + (1 − α) · Score<sub>CB</sub></div></div></div>
+          <div class="step"><div class="n">05</div><div><div class="ti">Cold-Start Fix</div><div class="de">Fall back to category popularity when history is sparse.</div></div></div>
+        </div>
+
+        <div class="formula-card">
+          <h4>Key formulas</h4>
+          <div class="formula">
+            <div class="lab">Jaccard Similarity</div>
+            <div class="eq">Sim(A, B) = |A ∩ B| / |A ∪ B|</div>
+          </div>
+          <div class="formula">
+            <div class="lab">Final score</div>
+            <div class="eq">α · CF + (1 − α) · CB,&nbsp; α = 0.7</div>
+          </div>
+          <div class="formula">
+            <div class="lab">Cold-start fallback</div>
+            <div class="eq">Top-N by category popularity</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════ SLIDE 19 — ARCHITECTURE CONTENT ════════════ -->
+  <section data-screen-label="20 Architecture — Content">
+    <div class="slide-pad">
+      <div class="s-head">
+        <div class="s-brand"><img src="assets/cartygo-logo.png" alt=""><b>Carty<span class="go">Go</span></b></div>
+        <div class="s-num"><span class="dot"></span><span>20 / 29</span></div>
+        <div class="s-pill"><span class="pill-dot"></span>07 · Technical Architecture</div>
+      </div>
+      <div class="s-rule"></div>
+
+      <div style="margin-top: 28px;">
+        <h2 class="h-big">A multi-service <span style="color: var(--ink-3);">distributed architecture.</span></h2>
+        <p class="body" style="margin-top: 14px; max-width: 1380px;">A REST HTTP API combined with real-time Socket.IO communication. All services share a common <strong>MongoDB Atlas</strong> database.</p>
+      </div>
+
+      <div class="arch-flow">
+        <div class="pill-card lav">
+          <div class="lab">Client side</div>
+          <div class="nm">Mobile App</div>
+          <div class="de">Flutter · Dart — the customer-facing application.</div>
+        </div>
+        <div class="pill-card lav">
+          <div class="lab">Client side</div>
+          <div class="nm">Cart Tablet</div>
+          <div class="de">Flutter · Dart — barcode scanner embedded in the cart.</div>
+        </div>
+        <div class="pill-card lav">
+          <div class="lab">Client side</div>
+          <div class="nm">Web Dashboard</div>
+          <div class="de">Next.js · React · SSR — manager &amp; cashier interface.</div>
+        </div>
+        <div class="pill-card ink">
+          <div class="lab">Service</div>
+          <div class="nm">Main API</div>
+          <div class="de">Node.js · Express · MVC — auth, profiles, products, orders, payments.</div>
+        </div>
+        <div class="pill-card ink">
+          <div class="lab">Service</div>
+          <div class="nm">IoT Server</div>
+          <div class="de">Socket.IO — real-time sync between cart and phone.</div>
+        </div>
+        <div class="pill-card ink">
+          <div class="lab">Service</div>
+          <div class="nm">Recommendation Engine</div>
+          <div class="de">Python · FastAPI — hybrid filtering &amp; scoring.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════ SLIDE 20 — ARCHITECTURE DIAGRAM ════════════ -->
+  <section data-screen-label="21 Architecture — Diagram">
+    <div class="slide-pad tight">
+      <div class="s-head">
+        <div class="s-brand"><img src="assets/cartygo-logo.png" alt=""><b>Carty<span class="go">Go</span></b></div>
+        <div class="s-num"><span class="dot"></span><span>21 / 29</span></div>
+        <div class="s-pill"><span class="pill-dot"></span>Fig. 7.1 · Architecture Diagram</div>
+      </div>
+      <div class="s-rule"></div>
+
+      <div class="diagram-page">
+        <div class="figcap">Fig. 7.1 — System Architecture Diagram</div>
+        <div class="plate-big"><img src="assets/diagram-architecture.png" alt=""></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════ SLIDE 21 — TECH STACK ════════════ -->
+  <section class="s-arch" data-screen-label="22 Tech Stack">
+    <div class="slide-pad">
+      <div class="s-head">
+        <div class="s-brand"><img src="assets/cartygo-logo.png" alt=""><b>Carty<span class="go">Go</span></b></div>
+        <div class="s-num"><span class="dot"></span><span>22 / 29</span></div>
+        <div class="s-pill"><span class="pill-dot"></span>07 · Technical Architecture</div>
+      </div>
+      <div class="s-rule"></div>
+
+      <div style="margin-top: 28px;">
+        <h2 class="h-big">The stack <span style="color: var(--ink-3);">behind CartyGo.</span></h2>
+      </div>
+
+      <div class="arch-card">
+        <table class="t-data">
+          <thead>
+            <tr>
+              <th style="width: 22%;">Component</th>
+              <th style="width: 28%;">Technology</th>
+              <th>Role</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td class="comp">Main API</td><td><span class="tech">Node.js · Express · MVC</span></td><td class="role">Authentication, profiles, products, orders, payments.</td></tr>
+            <tr><td class="comp">IoT Server</td><td><span class="tech">Socket.IO</span></td><td class="role">Real-time synchronization between cart and phone.</td></tr>
+            <tr><td class="comp">Recommendation</td><td><span class="tech">Python · FastAPI</span></td><td class="role">Hybrid collaborative + content-based filtering engine.</td></tr>
+            <tr><td class="comp">Web Dashboard</td><td><span class="tech">Next.js · React · SSR</span></td><td class="role">Manager &amp; cashier interface, store-side controls.</td></tr>
+            <tr><td class="comp">Mobile App</td><td><span class="tech">Flutter · Dart</span></td><td class="role">Customer-facing Android / iOS application.</td></tr>
+            <tr><td class="comp">Cart Tablet</td><td><span class="tech">Flutter · Dart</span></td><td class="role">Embedded barcode scanner with real-time sync.</td></tr>
+            <tr><td class="comp">Database</td><td><span class="tech">MongoDB Atlas</span></td><td class="role">Shared NoSQL cloud database for every service.</td></tr>
+            <tr><td class="comp">Payment</td><td><span class="tech">Chargily Pay</span></td><td class="role">CIB &amp; Dahabia electronic payment integration.</td></tr>
+            <tr><td class="comp">Security</td><td><span class="tech">JWT · bcrypt · OTP</span></td><td class="role">Authentication, password hashing, recovery flow.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════ SLIDE 22 — INTERFACES · MOBILE APP ════════════ -->
+  <section data-screen-label="23 Interfaces — Mobile App">
+    <div class="slide-pad">
+      <div class="s-head">
+        <div class="s-brand"><img src="assets/cartygo-logo.png" alt=""><b>Carty<span class="go">Go</span></b></div>
+        <div class="s-num"><span class="dot"></span><span>23 / 29</span></div>
+        <div class="s-pill"><span class="pill-dot"></span>08 · Interfaces</div>
+      </div>
+      <div class="s-rule"></div>
+
+      <div style="margin-top: 28px;">
+        <h2 class="h-big">Mobile App <span style="color: var(--ink-3);">— Customer interface.</span></h2>
+        <p class="body" style="margin-top: 12px; max-width: 1380px;">Built with <strong>Flutter</strong>, the mobile app guides the customer from onboarding through to live cart and checkout.</p>
+      </div>
+
+      <div class="mobile-grid">
+        <div class="phone"><div class="scr"><img src="assets/app-redefine-shopping.png" alt=""></div><div class="cap">Welcome</div></div>
+        <div class="phone"><div class="scr"><img src="assets/app-categories-v2.png" alt=""></div><div class="cap">Categories</div></div>
+        <div class="phone"><div class="scr"><img src="assets/app-diet.png" alt=""></div><div class="cap">Diet profile</div></div>
+        <div class="phone"><div class="scr"><img src="assets/app-home.png" alt=""></div><div class="cap">Home feed</div></div>
+        <div class="phone"><div class="scr"><img src="assets/app-product-detail-v2.png" alt=""></div><div class="cap">Product</div></div>
+        <div class="phone"><div class="scr"><img src="assets/app-connect-cart-v2.png" alt=""></div><div class="cap">Connect cart</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════ SLIDE 23 — DASHBOARD · OVERVIEW ════════════ -->
+  <section data-screen-label="24 Interfaces — Dashboard Overview">
+    <div class="slide-pad">
+      <div class="s-head">
+        <div class="s-brand"><img src="assets/cartygo-logo.png" alt=""><b>Carty<span class="go">Go</span></b></div>
+        <div class="s-num"><span class="dot"></span><span>24 / 29</span></div>
+        <div class="s-pill"><span class="pill-dot"></span>08 · Interfaces — Dashboard</div>
+      </div>
+      <div class="s-rule"></div>
+
+      <div style="margin-top: 28px;">
+        <h2 class="h-big">Dashboard.</h2>
+        <p class="body" style="margin-top: 12px;">Real-time store snapshot — sales, orders and stock health at a glance.</p>
+      </div>
+
+      <div class="dash-show">
+        <div class="frame"><img src="assets/dash-overview.png" alt="Dashboard overview"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════ SLIDE 27 — WHAT WE BUILT ════════════ -->
+  <section data-screen-label="25 What we built">
+    <div class="slide-pad">
+      <div class="s-head">
+        <div class="s-brand"><img src="assets/cartygo-logo.png" alt=""><b>Carty<span class="go">Go</span></b></div>
+        <div class="s-num"><span class="dot"></span><span>25 / 29</span></div>
+        <div class="s-pill"><span class="pill-dot"></span>09 · Conclusion</div>
+      </div>
+      <div class="s-rule"></div>
+
+      <div style="margin-top: 32px;">
+        <h2 class="h-big">What we built.</h2>
+        <p class="body" style="margin-top: 12px; max-width: 1380px;">A complete smart-supermarket ecosystem — three connected interfaces, one shared backbone.</p>
+      </div>
+
+      <div class="built-grid">
+        <div class="built-card">
+          <span class="pill">01 · Delivered</span>
+          <div class="nm">A complete ecosystem with three interconnected interfaces.</div>
+          <div class="de">Mobile app, connected-cart tablet and web dashboard — all wired through the same Main API and IoT server.</div>
+        </div>
+        <div class="built-card lav">
+          <span class="pill">02 · Delivered</span>
+          <div class="nm">A hybrid, personalized recommendation system.</div>
+          <div class="de">Collaborative filtering blended with content-based filtering, tuned by health profile and purchase history.</div>
+        </div>
+        <div class="built-card lav">
+          <span class="pill">03 · Delivered</span>
+          <div class="nm">Real-time sync between the connected cart and the mobile app.</div>
+          <div class="de">Every scan on the cart updates the customer's phone instantly through Socket.IO.</div>
+        </div>
+        <div class="built-card ink">
+          <span class="pill">04 · Delivered</span>
+          <div class="nm">A centralized manager dashboard.</div>
+          <div class="de">Live stock, sales metrics, promotions and cashier validation — a single command surface for the store.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════ SLIDE 28 — FUTURE IMPROVEMENTS ════════════ -->
+  <section data-screen-label="26 Future improvements">
+    <div class="slide-pad">
+      <div class="s-head">
+        <div class="s-brand"><img src="assets/cartygo-logo.png" alt=""><b>Carty<span class="go">Go</span></b></div>
+        <div class="s-num"><span class="dot"></span><span>26 / 29</span></div>
+        <div class="s-pill"><span class="pill-dot"></span>09 · Perspectives</div>
+      </div>
+      <div class="s-rule"></div>
+
+      <div style="margin-top: 32px;">
+        <h2 class="h-big">Future improvements.</h2>
+        <p class="body" style="margin-top: 12px; max-width: 1380px;">Where CartyGo goes next — both on the model and on the hardware side.</p>
+      </div>
+
+      <div class="built-grid">
+        <div class="built-card lav">
+          <span class="pill">Next · 01</span>
+          <div class="nm">Computer vision for automatic product detection.</div>
+          <div class="de">Drop the manual barcode scan — let a camera in the cart recognize items as they go in.</div>
+        </div>
+        <div class="built-card">
+          <span class="pill">Next · 02</span>
+          <div class="nm">Deep learning to refine recommendations.</div>
+          <div class="de">Move from Jaccard similarity to a neural model trained on real customer behaviour.</div>
+        </div>
+        <div class="built-card ink">
+          <span class="pill">Next · 03</span>
+          <div class="nm">Deployment on real hardware.</div>
+          <div class="de">Raspberry Pi, RFID readers, embedded tablets — bring the prototype into a live store.</div>
+        </div>
+        <div class="built-card lav">
+          <span class="pill">Next · 04</span>
+          <div class="nm">In-store A / B testing and live α tuning.</div>
+          <div class="de">Tune the collaborative-vs-content weighting from live behaviour rather than a fixed 0.7.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════ SLIDE 29 — DEMONSTRATION (TITLE) ════════════ -->
+  <section data-screen-label="27 Demonstration · Title">
+    <div class="slide-pad">
+      <div class="s-head">
+        <div class="s-brand"><img src="assets/cartygo-logo.png" alt=""><b>Carty<span class="go">Go</span></b></div>
+        <div class="s-num"><span class="dot"></span><span>27 / 29</span></div>
+        <div class="s-pill"><span class="pill-dot"></span>10 · Demonstration</div>
+      </div>
+      <div class="s-rule"></div>
+
+      <div class="demo-title">
+        <div class="logo-mark">
+          <img src="assets/cartygo-logo.png" alt="">
+          <div class="wm">Carty<span class="go">Go</span></div>
+        </div>
+        <h1>CartyGo<br><span class="accent">demonstration.</span></h1>
+        <p class="sub">We'll walk through the system from the customer's point of view — two real client profiles, each with their own preferences, allergies and shopping habits.</p>
+        <div class="ticks">
+          <span class="tick"><span class="num">01</span>Client &middot; Adnan</span>
+          <span class="tick alt"><span class="num">02</span>Client &middot; Imen</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════ SLIDE 30 — CLIENT 1 · ADNAN ════════════ -->
+  <section data-screen-label="28 Client · Adnan">
+    <div class="slide-pad">
+      <div class="s-head">
+        <div class="s-brand"><img src="assets/cartygo-logo.png" alt=""><b>Carty<span class="go">Go</span></b></div>
+        <div class="s-num"><span class="dot"></span><span>28 / 29</span></div>
+        <div class="s-pill"><span class="pill-dot"></span>10 · Demonstration — Client 1</div>
+      </div>
+      <div class="s-rule"></div>
+
+      <div style="margin-top: 28px;">
+        <h2 class="h-big">Meet <span style="color: var(--ink-3);">Adnan.</span></h2>
+      </div>
+
+      <div class="profile">
+        <div class="who">
+          <div class="photo">
+            <image-slot id="client-adnan" shape="rect" placeholder="Drop a photo of Adnan"></image-slot>
+          </div>
+          <div class="info">
+            <div class="lbl">Client 01</div>
+            <h3 class="nm">Adnan</h3>
+            <div class="role">A <strong>long-time CartyGo client</strong> and a family man — a father. Shops mostly for <strong>groceries</strong>.</div>
+          </div>
+        </div>
+
+        <div class="facts">
+          <div class="fact lav">
+            <div class="ic"><svg width="28" height="28" viewBox="0 0 24 24" fill="none"><path d="M4 12h2l2-6 4 12 4-12 2 6h2" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+            <div>
+              <div class="lab">Medical condition</div>
+              <div class="val">Diabetic</div>
+            </div>
+          </div>
+          <div class="fact">
+            <div class="ic"><svg width="28" height="28" viewBox="0 0 24 24" fill="none"><path d="M12 3c-3 3-5 6-5 9a5 5 0 0010 0c0-3-2-6-5-9z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M9 18c0 1 1 3 3 3s3-2 3-3" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></div>
+            <div>
+              <div class="lab">Diet preference</div>
+              <div class="val">Keto</div>
+            </div>
+          </div>
+          <div class="fact lime">
+            <div class="ic"><svg width="28" height="28" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="2"/><path d="M5.5 5.5l13 13" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></div>
+            <div>
+              <div class="lab">Allergies</div>
+              <div class="fact-tags"><span class="chip warn"><span class="dot"></span>Gluten</span></div>
+            </div>
+          </div>
+          <div class="fact">
+            <div class="ic"><svg width="28" height="28" viewBox="0 0 24 24" fill="none"><path d="M3 6h2l2 11h11l2-8H7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><circle cx="9" cy="20" r="1.5" stroke="currentColor" stroke-width="2"/><circle cx="17" cy="20" r="1.5" stroke="currentColor" stroke-width="2"/></svg></div>
+            <div>
+              <div class="lab">Shops mostly for</div>
+              <div class="fact-tags">
+                <span class="chip"><span class="dot"></span>Groceries</span>
+                <span class="chip"><span class="dot"></span>Family essentials</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════ SLIDE 31 — CLIENT 2 · IMEN ════════════ -->
+  <section data-screen-label="29 Client · Imen">
+    <div class="slide-pad">
+      <div class="s-head">
+        <div class="s-brand"><img src="assets/cartygo-logo.png" alt=""><b>Carty<span class="go">Go</span></b></div>
+        <div class="s-num"><span class="dot"></span><span>29 / 29</span></div>
+        <div class="s-pill"><span class="pill-dot"></span>10 · Demonstration — Client 2</div>
+      </div>
+      <div class="s-rule"></div>
+
+      <div style="margin-top: 28px;">
+        <h2 class="h-big">Meet <span style="color: var(--ink-3);">Imen.</span></h2>
+      </div>
+
+      <div class="profile">
+        <div class="who">
+          <div class="photo">
+            <image-slot id="client-imen" shape="rect" src="uploads/imen.png" placeholder="Drop a photo of Imen"></image-slot>
+          </div>
+          <div class="info">
+            <div class="lbl">Client 02</div>
+            <h3 class="nm">Imen</h3>
+            <div class="role">A <strong>college student</strong>. Shops mostly for <strong>makeup</strong> and <strong>skincare</strong>.</div>
+          </div>
+        </div>
+
+        <div class="facts">
+          <div class="fact lav">
+            <div class="ic"><svg width="28" height="28" viewBox="0 0 24 24" fill="none"><path d="M4 19l4-12 4 8 4-6 4 10" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+            <div>
+              <div class="lab">Profile</div>
+              <div class="val">College student</div>
+            </div>
+          </div>
+          <div class="fact">
+            <div class="ic"><svg width="28" height="28" viewBox="0 0 24 24" fill="none"><path d="M5 12a7 7 0 0014 0c0-4-3-6-7-6S5 8 5 12z" stroke="currentColor" stroke-width="2"/></svg></div>
+            <div>
+              <div class="lab">Diet preference</div>
+              <div class="val">No restrictions</div>
+            </div>
+          </div>
+          <div class="fact lime">
+            <div class="ic"><svg width="28" height="28" viewBox="0 0 24 24" fill="none"><path d="M5 13l4 4 10-10" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+            <div>
+              <div class="lab">Allergies</div>
+              <div class="fact-tags"><span class="chip none"><span class="dot"></span>None</span></div>
+            </div>
+          </div>
+          <div class="fact">
+            <div class="ic"><svg width="28" height="28" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="9" r="4" stroke="currentColor" stroke-width="2"/><path d="M8 14c-1 1-2 3-2 6h12c0-3-1-5-2-6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></div>
+            <div>
+              <div class="lab">Shops mostly for</div>
+              <div class="fact-tags">
+                <span class="chip"><span class="dot"></span>Makeup</span>
+                <span class="chip"><span class="dot"></span>Skincare</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</deck-stage>
+
+<script src="deck-stage.js"></script>
+<script src="image-slot.js"></script>
+
+<!-- React + Babel for Tweaks panel -->
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+<script type="text/babel" src="tweaks-panel.jsx"></script>
+<script type="text/babel" src="tweaks.jsx"></script>
+
+</body>
+</html>

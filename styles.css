@@ -1,0 +1,333 @@
+/* CartyGo — PFE Defense Deck — Design Tokens & Layout */
+
+:root {
+  /* ── Brand palette (overridable via Tweaks) ── */
+  --bg:        #FAEFE0;   /* warm cream */
+  --paper:     #FCF5EA;   /* slightly lighter card */
+  --ink:       #0E0E14;   /* near-black for body */
+  --ink-2:     #2A2933;   /* secondary text */
+  --ink-3:     #6B6873;   /* muted */
+  --hairline:  #1A1A22;   /* deep ink for borders */
+
+  --accent:    #C9B8FA;   /* primary lavender */
+  --accent-2:  #A88CFF;   /* deep lavender */
+  --accent-bg: #ECE4FA;   /* lavender wash */
+  --lime:      #CFE96A;   /* secondary lime */
+  --lime-2:    #B9D74C;   /* deep lime */
+
+  /* Typography */
+  --font-display: "Archivo Black", "Anton", system-ui, sans-serif;
+  --font-body:    "Manrope", "Inter", system-ui, sans-serif;
+  --font-mono:    "JetBrains Mono", ui-monospace, Menlo, monospace;
+}
+
+/* ── Stage ── */
+html, body { background: #0a0a0d; margin: 0; }
+deck-stage:not(:defined) { visibility: hidden; }
+deck-stage > section {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-size: 42px;
+  line-height: 1.42;
+  letter-spacing: -0.005em;
+  position: relative;
+  overflow: hidden;
+}
+
+/* ── Slide chrome (header + footer present on every slide except the title) ── */
+.slide-pad   { position: absolute; inset: 80px 110px 80px; display: flex; flex-direction: column; }
+.slide-pad.tight { inset: 80px 110px 70px; }
+
+.s-head {
+  display: flex; align-items: center; justify-content: space-between;
+  font-family: var(--font-body); font-size: 42px; letter-spacing: 0.16em;
+  text-transform: uppercase; color: var(--ink-3); font-weight: 600;
+}
+.s-head .s-num {
+  display: inline-flex; align-items: center; gap: 14px;
+  color: var(--ink);
+}
+.s-head .s-num .dot { width: 10px; height: 10px; border-radius: 50%; background: var(--accent-2); }
+.s-head .s-pill {
+  display: inline-flex; align-items: center; gap: 10px;
+  padding: 9px 18px; border: 1px solid var(--hairline); border-radius: 999px;
+  font-size: 30px; letter-spacing: 0.14em; color: var(--ink);
+}
+.s-head .s-pill .pill-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--lime-2); }
+
+.s-foot {
+  position: absolute; left: 110px; right: 110px; bottom: 50px;
+  display: flex; align-items: center; justify-content: space-between;
+  font-family: var(--font-body); font-size: 30px; letter-spacing: 0.18em;
+  text-transform: uppercase; color: var(--ink-3); font-weight: 600;
+}
+.s-foot .s-brand { display: inline-flex; align-items: center; gap: 12px; }
+.s-foot .s-brand .s-logo {
+  width: 26px; height: 26px; border-radius: 7px; background: var(--accent);
+  display: inline-flex; align-items: center; justify-content: center;
+}
+.s-foot .s-brand .s-logo svg { width: 18px; height: 18px; }
+.s-foot .s-brand b { font-family: var(--font-display); color: var(--ink); letter-spacing: 0; font-size: 30px; text-transform: none; }
+
+/* Hairline between header and body */
+.s-rule { height: 1px; background: var(--hairline); opacity: 0.85; margin: 28px 0 0; }
+
+/* ── Type ── */
+.h-display {
+  font-family: var(--font-display);
+  font-size: 120px; line-height: 0.92;
+  letter-spacing: -0.03em;
+  color: var(--ink);
+}
+.h-section {
+  font-family: var(--font-display);
+  font-size: 120px; line-height: 0.94;
+  letter-spacing: -0.025em;
+  color: var(--ink);
+}
+.h-2 {
+  font-family: var(--font-display);
+  font-size: 62px; line-height: 0.98;
+  letter-spacing: -0.02em;
+}
+.h-3 {
+  font-family: var(--font-display);
+  font-size: 62px; line-height: 1.05;
+  letter-spacing: -0.005em;
+}
+.eyebrow {
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: 30px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+}
+.lead {
+  font-size: 42px; line-height: 1.45; color: var(--ink-2); max-width: 1200px;
+  font-weight: 500;
+}
+.body { font-size: 42px; line-height: 1.45; color: var(--ink-2); }
+.body-sm { font-size: 42px; line-height: 1.45; color: var(--ink-3); }
+
+.accent-fill { color: var(--accent-2); }
+.accent-mark { background: var(--lime); padding: 0 .15em; border-radius: 4px; color: var(--ink); }
+
+/* ── Cards ── */
+.card {
+  background: var(--paper);
+  border: 1px solid var(--hairline);
+  border-radius: 26px;
+  padding: 36px 36px 32px;
+  position: relative;
+  display: flex; flex-direction: column;
+}
+.card-lav   { background: var(--accent-bg); }
+.card-lime  { background: color-mix(in oklab, var(--lime) 35%, var(--paper)); }
+.card-ink   { background: var(--hairline); color: #F4EFE6; border-color: transparent; }
+.card-ink .body, .card-ink .body-sm { color: rgba(244,239,230,.78); }
+
+.card .k {
+  font-family: var(--font-display);
+  font-size: 42px; color: var(--ink);
+  letter-spacing: -0.005em;
+  margin-bottom: 10px;
+}
+.card .k-num {
+  font-family: var(--font-display);
+  font-size: 62px; line-height: 1; letter-spacing: -0.02em;
+  color: var(--accent-2);
+  margin-bottom: 14px;
+}
+.card-ink .k-num { color: var(--lime); }
+
+/* ── Generic helpers ── */
+.row   { display: flex; gap: 28px; }
+.col   { display: flex; flex-direction: column; gap: 28px; }
+.grow  { flex: 1; }
+.stack-12 { display: flex; flex-direction: column; gap: 12px; }
+.stack-20 { display: flex; flex-direction: column; gap: 20px; }
+.stack-28 { display: flex; flex-direction: column; gap: 28px; }
+
+.grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; }
+.grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 28px; }
+.grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 22px; }
+
+/* ── Bulleted lists in CartyGo style ── */
+.b-list { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 14px; }
+.b-list li { display: flex; gap: 16px; align-items: flex-start; font-size: 42px; color: var(--ink-2); line-height: 1.4; }
+.b-list li::before {
+  content: ""; width: 14px; height: 14px; border-radius: 4px;
+  background: var(--accent); flex-shrink: 0; margin-top: 8px;
+  display: inline-block;
+}
+.b-list.lime li::before { background: var(--lime-2); }
+.b-list.ink  li::before { background: var(--ink); }
+
+/* Numbered list */
+.n-list { list-style: none; padding: 0; margin: 0; counter-reset: nlist; display: flex; flex-direction: column; gap: 22px; }
+.n-list li {
+  counter-increment: nlist;
+  display: grid; grid-template-columns: 78px 1fr; gap: 22px; align-items: baseline;
+  border-top: 1px solid color-mix(in oklab, var(--hairline) 18%, transparent);
+  padding-top: 18px;
+}
+.n-list li::before {
+  content: counter(nlist, decimal-leading-zero);
+  font-family: var(--font-display); font-size: 62px; color: var(--accent-2);
+  letter-spacing: -0.02em;
+}
+.n-list li .ti { font-family: var(--font-display); font-size: 42px; color: var(--ink); margin-bottom: 4px; letter-spacing: -0.005em; }
+.n-list li .de { font-size: 30px; color: var(--ink-3); line-height: 1.42; }
+
+/* ── Pills / tags ── */
+.tag {
+  display: inline-flex; align-items: center; gap: 10px;
+  padding: 10px 20px; border-radius: 999px;
+  font-size: 30px; font-weight: 600; letter-spacing: 0.04em;
+  background: var(--accent-bg); color: var(--ink);
+}
+.tag.lime { background: color-mix(in oklab, var(--lime) 55%, transparent); }
+.tag.ink  { background: var(--hairline); color: #F4EFE6; }
+.tag .d   { width: 8px; height: 8px; border-radius: 50%; background: var(--accent-2); }
+.tag.lime .d { background: var(--lime-2); }
+.tag.ink  .d { background: var(--lime); }
+
+/* ── Tables (academic data) ── */
+.t-data { width: 100%; border-collapse: collapse; font-size: 42px; }
+.t-data th, .t-data td { text-align: left; padding: 20px 24px; border-bottom: 1px solid color-mix(in oklab, var(--hairline) 20%, transparent); vertical-align: top; }
+.t-data th { font-family: var(--font-display); font-size: 30px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--ink); font-weight: 400; background: color-mix(in oklab, var(--accent-bg) 60%, transparent); }
+.t-data td.tech { font-family: var(--font-mono); font-size: 30px; color: var(--ink); }
+.t-data tr:last-child td { border-bottom: none; }
+
+/* ── Iphone frame ── */
+.iphone {
+  width: 320px; aspect-ratio: 320 / 660;
+  border-radius: 44px;
+  padding: 14px;
+  background: var(--hairline);
+  box-shadow: 0 30px 80px -30px rgba(14,14,20,.4);
+  position: relative; flex-shrink: 0;
+}
+.iphone .scr {
+  width: 100%; height: 100%; border-radius: 32px; overflow: hidden;
+  background: var(--bg); position: relative;
+}
+.iphone .scr img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.iphone .notch {
+  position: absolute; top: 24px; left: 50%; transform: translateX(-50%);
+  width: 100px; height: 28px; background: var(--hairline); border-radius: 16px; z-index: 2;
+}
+
+/* ── Diagram placeholders ── */
+.diagram-slot {
+  background: var(--paper);
+  border: 1.5px dashed color-mix(in oklab, var(--hairline) 45%, transparent);
+  border-radius: 22px;
+  display: flex; align-items: center; justify-content: center;
+  color: var(--ink-3);
+  font-size: 30px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase;
+  position: relative;
+  overflow: hidden;
+}
+.diagram-slot .fig-label {
+  position: absolute; top: 22px; left: 26px;
+  font-size: 30px; letter-spacing: 0.2em; color: var(--ink-3);
+}
+.diagram-slot image-slot { width: 100%; height: 100%; display: block; }
+
+/* ── Logo mark ── */
+.brand-logo {
+  display: inline-flex; align-items: center; gap: 16px;
+}
+.brand-logo .mark {
+  width: 56px; height: 56px; border-radius: 14px; background: var(--accent);
+  display: flex; align-items: center; justify-content: center;
+}
+.brand-logo .mark svg { width: 36px; height: 36px; }
+.brand-logo .word {
+  font-family: var(--font-display); font-size: 62px; letter-spacing: -0.02em; color: var(--ink);
+}
+
+/* ── Decoration: lime stripes (used sparingly on cover) ── */
+.lime-stripes {
+  position: absolute; inset: 0; pointer-events: none;
+  background-image: repeating-linear-gradient(
+    90deg,
+    transparent 0 95px,
+    var(--lime) 95px 175px
+  );
+  opacity: 0.55;
+  mask-image: linear-gradient(180deg, #000 0%, #000 38%, transparent 100%);
+  -webkit-mask-image: linear-gradient(180deg, #000 0%, #000 38%, transparent 100%);
+}
+
+/* ── Drop shadow plate (for diagram large slides) ── */
+.plate {
+  background: var(--paper);
+  border: 1px solid var(--hairline);
+  border-radius: 22px;
+  box-shadow: 8px 8px 0 var(--hairline);
+}
+
+/* Hide brand logo glyph children's strokes when accent changes */
+.brand-logo .mark svg path,
+.brand-logo .mark svg circle { stroke: var(--ink); }
+
+/* === Print fixes === */
+@media print {
+  deck-stage > section { background: var(--bg) !important; }
+}
+
+/* ── Slide entry animations ── */
+@keyframes deck-slide-in {
+  from { opacity: 0; transform: translateY(28px); }
+  to   { opacity: 1; transform: none; }
+}
+@keyframes deck-fade-in {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+deck-stage > section[data-deck-active] .slide-pad > * {
+  animation: deck-slide-in 600ms cubic-bezier(.2,.8,.2,1) both;
+}
+deck-stage > section[data-deck-active] .slide-pad > *:nth-child(1) { animation-delay: 80ms; }
+deck-stage > section[data-deck-active] .slide-pad > *:nth-child(2) { animation-delay: 180ms; }
+deck-stage > section[data-deck-active] .slide-pad > *:nth-child(3) { animation-delay: 280ms; }
+deck-stage > section[data-deck-active] .slide-pad > *:nth-child(4) { animation-delay: 360ms; }
+deck-stage > section[data-deck-active] .slide-pad > *:nth-child(5) { animation-delay: 440ms; }
+deck-stage > section[data-deck-active] .slide-pad > *:nth-child(n+6) { animation-delay: 500ms; }
+
+/* Cover slide — no .slide-pad, animate top-level children */
+deck-stage > section.cover[data-deck-active] > * {
+  animation: deck-slide-in 600ms cubic-bezier(.2,.8,.2,1) both;
+}
+deck-stage > section.cover[data-deck-active] > .top-bar { animation-delay: 60ms; }
+deck-stage > section.cover[data-deck-active] > .center  { animation-delay: 180ms; }
+deck-stage > section.cover[data-deck-active] > .meta    { animation-delay: 320ms; }
+deck-stage > section.cover[data-deck-active] > .footer  { animation-delay: 420ms; }
+
+/* Footer band: simple fade so it doesn't slide twice */
+deck-stage > section[data-deck-active] > .s-foot {
+  animation: deck-fade-in 700ms ease both;
+  animation-delay: 380ms;
+}
+
+/* Title staggered children inside .center on the cover */
+deck-stage > section.cover[data-deck-active] > .center > * {
+  animation: deck-slide-in 600ms cubic-bezier(.2,.8,.2,1) both;
+}
+deck-stage > section.cover[data-deck-active] > .center > *:nth-child(1) { animation-delay: 200ms; }
+deck-stage > section.cover[data-deck-active] > .center > *:nth-child(2) { animation-delay: 320ms; }
+deck-stage > section.cover[data-deck-active] > .center > *:nth-child(3) { animation-delay: 440ms; }
+
+/* Respect prefers-reduced-motion */
+@media (prefers-reduced-motion: reduce) {
+  deck-stage > section[data-deck-active] .slide-pad > *,
+  deck-stage > section.cover[data-deck-active] > *,
+  deck-stage > section.cover[data-deck-active] > .center > *,
+  deck-stage > section[data-deck-active] > .s-foot {
+    animation: none !important;
+  }
+}
