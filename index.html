@@ -423,7 +423,7 @@
     position: relative; overflow: hidden;
   }
   .profile .who .photo {
-    flex: 1; min-height: 0;
+    flex: none; height: 470px;
     background: var(--accent-bg);
     overflow: hidden;
     display: flex; align-items: stretch; justify-content: stretch;
@@ -440,8 +440,9 @@
     display: block;
   }
   .profile .who .info {
+    flex: 1;
     padding: 28px 36px 32px;
-    display: flex; flex-direction: column; gap: 14px;
+    display: flex; flex-direction: column; justify-content: center; gap: 14px;
     position: relative; z-index: 1;
   }
   .profile .who .lbl {
